@@ -5,4 +5,4 @@ This uses a Arduino Uno Controller which monitors Humidity from DTH11 sensor and
 
 I have used Interrupts to set desired Maximum and Minimum Humidity levels at any point.
 
-Also a simple loop structure to display the time, but the time modle is not accurate yet. 
+Also a simple loop structure to display the time, but the time module is not accurate yet. 
