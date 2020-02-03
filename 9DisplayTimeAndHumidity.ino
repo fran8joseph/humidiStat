@@ -18,6 +18,8 @@ int potPin = A2;
 int humidity;
 int roomTemp;
 
+ int firstTimeCheck =0;
+
 volatile int setHour = 0;
 volatile int setMin = 0;
 
@@ -119,6 +121,7 @@ void setup() {
 void loop() {
 
   int chk = DHT.read11(DHT11_PIN);
+ 
 
   humidity = DHT.humidity;
   roomTemp = DHT.temperature;
@@ -133,14 +136,16 @@ void loop() {
   lcd.print("  H:");
   lcd.print(humidity);
   lcd.print("% ");
-  delay(1000);
+  if(firstTimeCheck==0)
+    delay(800);
 
   lcd.clear();
   lcd.print("Min=");
   lcd.print(setMinValue);
   lcd.print("  Max=");
   lcd.print(setMaxValue);
-  delay(2000);
+  if(firstTimeCheck==0)
+    delay(800);
 
 
   humidity = DHT.humidity;
@@ -154,7 +159,8 @@ void loop() {
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("Humidity lesser");
-      delay(5000);
+      if(firstTimeCheck==0)
+        delay(500);
 
       if (servo_pos > 90) {
         servo.write(0);
@@ -169,7 +175,7 @@ void loop() {
 
       if (servo_pos < 100) {
         servo.write(180);
-        delay(1000);
+        delay(500);
       }
 
     }
@@ -282,8 +288,10 @@ void loop() {
     else
       lcd.backlight();
 
-    delay(1000);
+    delay(945);
   }
+
+  firstTimeCheck+=1;
 
 }
 
